@@ -73,6 +73,65 @@ nav{
             }
         }
 
+        // user avatar
+        .user{
+            display: flex;
+            align-items: center;
+            column-gap: 1em;
+
+            .user-container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                row-gap: 0.2em;
+                position: relative;
+                cursor: pointer;
+    
+                .avatar{
+                    width: 2.5rem;
+                    aspect-ratio: 1;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    cursor: pointer;
+                }
+                .username{
+                    font-size: 0.8rem;
+                }
+                .options{
+                    position: absolute;
+                    top: 3.5em; right: 1em;
+                    background: white;
+                    color: black;
+                    display: grid;
+                    border-radius: 5px;
+                    width: 10em;
+                    border: 1px solid gray;
+                    z-index: 2;
+    
+                    .option-links{
+                        padding: 0.4em;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .hamburger-menu{
+                font-size: 1.8rem;
+                display: none;
+                color: hsl(0, 0%, 40%);
+                font-weight: 700;
+                z-index: 100;
+                cursor: pointer;
+                padding-right: 0.3em;
+    
+                @include devices(tablet){
+                    display: block;
+                }
+            }
+        }
+
+
+        // nav login
         .nav-login{
             display: flex;
             align-items: center;
@@ -178,7 +237,7 @@ nav{
             row-gap: 1.5rem;
 
             // Join btn mobile nav
-            .join-fiverr{
+            .join-fiverr , .logout-fiverr{
                 background-color: hsl(152, 74%, 37%);
                 cursor: pointer;   
                 border: none;
@@ -186,6 +245,7 @@ nav{
                 color: hsl(0, 0%, 100%);        
                 border-radius: 3px;    
                 font-weight: 600;    
+                font-size: 1rem;
                 transition: all 0.2s ease-in-out;
                 
                 &:hover{
@@ -195,7 +255,7 @@ nav{
 
             // category
             .category-container{
-                color: hsl(0, 0%, 50%);
+                color: hsl(0, 0%, 50%) ;
                 display: grid;
                 row-gap: 0.45em;
                 
@@ -235,6 +295,10 @@ nav{
                 h4{
                     font-size: 1rem;
                     cursor: pointer;
+
+                    a{
+                     color :   hsl(0, 0%, 50%) ;
+                    }
                 }
             }
 

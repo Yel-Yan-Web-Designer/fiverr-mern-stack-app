@@ -1,14 +1,21 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-// import { Link, useLocation } from "react-router-dom";
 import "./Navbar.scss";
 import {RxHamburgerMenu} from "react-icons/rx";
 import {AiFillCaretDown} from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [dropdown, setDropdown] = useState(false);
     const [scroll, setScroll] = useState(false);
     const [navOpen , setNavOpen] = useState(false);
+    const [option , setoption] = useState(false);
+
+    const currentUser = {
+        id: 1,
+        username : "Anna",
+        isSeller : false
+    }
 
     function toggleNavMenu () {
         setNavOpen(prevState => !prevState);
@@ -37,14 +44,43 @@ const Navbar = () => {
                 <span className='fiverr-business'>Fiverr Business</span>
                 <span>Explore</span>
                 <span>English</span>
-                <span>Become a Seller</span>
+                {!currentUser?.isSeller && <span>Become a Seller</span>}
             </div>
 
+            {currentUser ? (
+                <div className="user">
+                    <div className="user-container" onClick={() => setoption(!option)}>
+                        <div className="avatar">
+                        <img
+                        src="https://images.pexels.com/photos/1115697/pexels-photo-1115697.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                        alt=""
+                        className='avatar'
+                    />
+                        </div>
+                        {option && <div className='options'>
+                            {currentUser?.isSeller && (
+                                <>
+                                    <Link className='option-links' to="/mygigs">Gigs</Link>
+                                    <Link className='option-links' to="/add">Add New Gig</Link>
+                                </>
+                            )}
+                    <Link className='option-links' to="/orders">Orders</Link>
+                    <Link className='option-links' to="/messages">Messages</Link>
+                    <Link className='option-links' to="/">Logout</Link>
+                        </div>}
+                    </div>
+                    <RxHamburgerMenu className='hamburger-menu' onClick={toggleNavMenu}/>
+                </div>
+            ) : 
+            (
             <div className="nav-login">
                 <span>Sign In</span>
                 <span><button className='join-btn'>Join</button></span>
                 <RxHamburgerMenu className='hamburger-menu' onClick={toggleNavMenu}/>
             </div>
+            )
+            }
+
         </div>
         <div className="line-break"></div>
         <div className="subnav-2">
@@ -60,7 +96,9 @@ const Navbar = () => {
         </div>
         {/* mobile nav */}
         <div className='mobile-nav'>
-            <button className='join-fiverr'>Join Fiverr</button>
+            {!currentUser ? (<button className='join-fiverr'>Join Fiverr</button>) : (
+                <Link className='logout-fiverr' to="/">Log out</Link>
+            )}
 
             <div className="category-container">
                 <div className="drop-down">
@@ -84,8 +122,8 @@ const Navbar = () => {
             <div className="general-container">
                 <h3>General</h3>
                 <div className="general-links">
-                    <h4>Home</h4>
-                    <h4>Become A Seller</h4>
+                    <h4><Link to="/">Home</Link></h4>
+                    {!currentUser?.isSeller && <h4>Become A Seller</h4>}
                     <h4>English</h4>
                 </div>
             </div>
@@ -94,4 +132,12 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default Navbar;
+
+/*
+Gigs
+Add new gigs
+orders
+messages
+logout
+*/
