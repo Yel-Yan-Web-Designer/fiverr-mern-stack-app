@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Featured.scss"
+import "./Featured.scss";
 
 const Featured = () => {
   return (
@@ -19,13 +19,12 @@ const Featured = () => {
             </h1>
             <div className="search">
                 <div className="searchbar">
-                  <img src="img/search.png" alt="" />
                   <input 
                     type="text" 
-                    placeholder='What services are you looking for?'  
+                    placeholder='Search for any service'  
                   />
                 </div>
-                <div className="submit-btn">Search</div>
+                <div className="submit-btn"><img src="img/search.png" alt="" /></div>
             </div>
             <div className="popular">
               <span>Popular:</span>
@@ -33,11 +32,11 @@ const Featured = () => {
               <button>WordPress</button>
               <button>Logo Design</button>
               <button>AI Services</button>
-          </div>
+            </div>
           </div>
         </div>
     </div>
   )
 }
 
-export default Featured
+export default Featured;

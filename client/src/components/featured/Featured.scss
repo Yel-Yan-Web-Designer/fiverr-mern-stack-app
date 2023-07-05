@@ -14,17 +14,22 @@
 }
 
 .hero-wrapper{
-    height : 680px;
+    height : 480px;
     position: relative;
+
+    @include devices (tablet){
+        height: 680px;
+    }
 
     .hero-backgrounds {
         position: relative;
         width: 100%;
         height: 100%;
         overflow: hidden;
+        background: hsl(0, 0%, 20%);
 
         div{
-            @include devices (desktop) {
+            @include devices (tablet) {
                 position: absolute;
                 width: 100%;
                 height: 100%;
@@ -35,31 +40,31 @@
             }
         }
         .hero-img1{
-            @include devices (desktop){
+            @include devices (tablet){
                 background-image: url('fiverr-img/moon.jpg');
                 animation: fade1 25s infinite;
             }
         }
         .hero-img2{
-            @include devices (desktop){
+            @include devices (tablet){
                 background-image: url('fiverr-img/zach.jpg');
                 animation: fade2 25s infinite;
             }
         }
         .hero-img3{
-            @include devices (desktop){
+            @include devices (tablet){
                 background-image: url('fiverr-img/andrea.jpg');
                 animation: fade3 25s infinite;
             }
         }
         .hero-img4{
-            @include devices (desktop){
+            @include devices (tablet){
                 background-image: url('fiverr-img/garbrielle.jpg');
                 animation: fade4 25s infinite;
             }
         }
         .hero-img5{
-            @include devices (desktop){
+            @include devices (tablet){
                 background-image: url('fiverr-img/ai-artist.jpg');
                 animation: fade5 25s infinite;
             }
@@ -76,21 +81,122 @@
     
     .hero-content{
         position: absolute;
-        top: 50%;
+        width: 90%;
+        top: 40%;
         left: 50%;
-        transform: translate(-96%, -50%);
-        width: 50%;
+        transform: translate(-50%, -30%);
 
-        display: flex;
+        @include devices (tablet){
+            width: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-96%, -50%);
+        }
 
+        .header {
+            display: flex;
+            flex-direction: column;
+            row-gap: 1.5rem;
+        }
+        // header h1
         .header h1{
             color: white;
-            font-size: 48px;
+            font-size: 42px;
             line-height: 56px;
 
             i{
                 font-weight: 400;
                 font-family: 'PT Serif', serif;
+            }
+
+            @include devices (tablet){
+                font-size: 48px;
+            }
+        }
+
+        // search 
+        .header .search {
+            display: flex;
+            flex-direction: column;
+            row-gap: 1rem;
+
+            .searchbar{
+                background: white;
+                padding: 0.2em 0;
+                width: 100%;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+                height: 42px;
+
+                input{
+                    font-size: 1.2em;
+                    border: none;
+                    background: none;
+                    height: 100%;
+                    padding-left: 0.7em;
+                    width: 100%;
+
+                    &:focus{
+                        outline: none;
+                        border: none;
+                    }
+                }
+            }
+            .submit-btn{
+                color: white;
+                background-color: hsl(152, 74%, 37%);
+                height: 49.5px;
+                padding : 0em 1.5em;
+                display: grid;
+                place-items: center;
+                border-radius: 0 4px 4px 0;
+                cursor: pointer;
+
+                &:hover{
+                    background-color: hsl(152, 74%, 27%);
+                }
+            }
+
+            @include devices(tablet){
+                flex-direction: row;
+                align-items: center;
+
+                .searchbar{
+                    padding: 0.2em 0.8em;
+                }
+            }
+        }
+
+        // popular
+        .header .popular{
+            display: none;
+
+            @include devices (tablet){
+                display: flex;
+                flex-wrap: wrap;
+                align-items : center;
+                gap : 0.7em;
+                span {
+                    color: white;
+                }
+                button {
+                    background: transparent;
+                    border: 1px solid white;
+                    color: white;
+                    border-radius: 20px;
+                    font-size: 0.95rem;
+                    font-weight: 550;
+                    padding: 0.2em 0.8em;
+                    display: inline-block;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: 0.2s;
+    
+                    &:hover{
+                        background: white;
+                        color: hsl(0, 0%, 50%);
+                    }
+                }
             }
         }
     }
