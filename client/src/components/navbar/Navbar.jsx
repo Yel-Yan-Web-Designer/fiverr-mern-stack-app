@@ -82,7 +82,7 @@ const Navbar = () => {
             }
 
         </div>
-        <div className="line-break"></div>
+        {scroll && <div className="line-break"></div>}
         <div className="subnav-2">
             <h3 className="link">Digital Marketing</h3>
             <h3 className="link">Graphic & Design</h3>

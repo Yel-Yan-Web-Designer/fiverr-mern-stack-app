@@ -1,9 +1,13 @@
 import React from 'react';
-import "./Home.scss"
+import "./Home.scss";
+
+import {Featured} from "../../components/index";
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div className="home">
+      <Featured/>
+    </div>
   )
 }
 
