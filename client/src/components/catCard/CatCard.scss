@@ -1,0 +1,52 @@
+@mixin devices ($breakpoint) { //the name of the mixin is devices
+  
+    @if $breakpoint == tablet {    
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  }
+ 
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 1028px) {
+      @content;
+    }
+  }
+}
+
+.catCard{
+  .container{
+        position: relative;
+        overflow: hidden;
+        width: 15rem;
+        cursor: pointer;
+        margin : 0 auto;
+
+        // @include devices (tablet){
+        //   margin: 0 auto;
+        // }
+        
+        .catCard-img{
+            width: 15rem;
+            height: 345px;
+            border-radius: 6px;
+            object-fit: cover;
+            filter: brightness(0.55);
+
+            &:hover{
+              filter : brightness(0.8);
+            }
+        }
+        .cat-content{
+          position: absolute;
+          top: 15px; left: 15px;
+          color: white;
+
+          .title{
+            font-size: 1rem;
+          }
+          .desc{
+            font-size: 1.5rem;
+          }
+        }
+    }
+}

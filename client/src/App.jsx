@@ -21,7 +21,7 @@ import {
   Orders
  } from "./pages/index.js";
 
- import "./App.scss";
+import "./App.scss";
 
 function App() {
 

@@ -1,0 +1,26 @@
+@mixin devices ($breakpoint) { //the name of the mixin is devices
+  
+    @if $breakpoint == tablet {    
+    @media only screen and (min-width: 768px) {
+      @content;
+    }
+  }
+ 
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 1028px) {
+      @content;
+    }
+  }
+}
+
+.slide {
+  padding: 1rem 1.8rem;
+
+  h1{
+    color: hsl(0, 0%, 40%);
+    margin-bottom: 1.8rem;
+  }
+    .container{
+        width: 100%;
+    }
+}
