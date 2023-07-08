@@ -1,0 +1,133 @@
+@mixin devices ($breakpoint) { //the name of the mixin is devices
+  
+    @if $breakpoint == tablet {    
+    @media only screen and (max-width: 800px) {
+      @content;
+    }
+  }
+ 
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 500px) {
+      @content;
+    }
+  }
+}
+
+.business{
+    margin-block: 3rem;
+    padding: 5rem 2rem;
+    background-color:hsl(244, 81%, 17%);
+    color: white;
+
+    .container{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: space-between;
+        align-items: center;
+
+        // business content
+        .business-content{
+            justify-self: flex-start;
+            flex-basis: 45%;
+            max-width: 45%;
+
+            display: grid;
+            row-gap: 1.8rem;
+
+            .business-subtitle{
+                font-size: 1.8rem;
+                display: flex;
+                align-items: center;
+                column-gap: 0.5rem;
+
+                span {
+                    b{
+                        letter-spacing: -2px;
+                        font-weight: 600;
+                    }
+                    font-weight: 400;
+                    letter-spacing: -1px;
+                }
+
+                .new{
+                    display: inline-block;
+                    letter-spacing: 1px;
+                    font-weight: 600;
+                    font-size: 0.7rem;
+                    padding: 1px 10px;
+                    border-radius: 100px;
+                    background-color: hsl(245, 100%, 65%);
+                }
+            }
+
+            .business-title{
+                i{
+                    font-family: 'PT Serif', serif;
+                    font-weight: 400;
+                }
+            }
+            .business-content-details{
+                .business-desc{
+                    font-weight: 500;
+                    font-size: 1.2rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .business-list{
+                    display: grid;
+                    row-gap: 1rem;
+
+                    li{
+                        display: flex;
+                        align-items: center;
+                        column-gap: 0.8rem;
+
+                        span img{
+                           width: 1.5rem;
+                        }
+                        p{
+                            font-size: 1.1rem;
+                        }
+                    }
+                }
+            }
+            .explore-btn{
+                justify-self: flex-start;
+                display: inline-block;
+                color: white;
+                font-weight: 500;
+                border-radius: 3px;
+                padding: 0.5rem 1.5rem;
+                background:  hsl(152, 74%, 37%);;
+            }
+        }
+        .business-img{
+            flex-basis: 50%;
+            max-width: 50%;
+
+            img{
+                margin-left: auto;
+            }
+        }
+    
+        // responsive version
+        @include devices (tablet){
+            flex-direction: column;
+            row-gap: 3.5rem;
+
+            .business-content{
+                flex-basis: 100%;
+                max-width: 100%;
+            }
+            .business-img{
+                flex-basis: 100%;
+                max-width: 100%;
+            }
+        }
+    }
+    
+    @include devices (mobile) {
+        padding: 5rem 0.8rem;
+    }
+}

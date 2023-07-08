@@ -1,0 +1,97 @@
+@mixin devices ($breakpoint) { //the name of the mixin is devices
+  
+    @if $breakpoint == tablet {    
+    @media only screen and (max-width: 800px) {
+      @content;
+    }
+  }
+ 
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 500px) {
+      @content;
+    }
+  }
+}
+
+.selling {
+    margin-block: 3rem;
+    padding: 5rem 2rem;
+    background-color: hsl(150, 75%, 97%);
+
+    .container{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: space-between;
+        align-items: center;
+       
+
+        //  selling content
+        .selling-content{
+            justify-self: flex-start;
+            flex-basis: 35%;
+            max-width: 35%;
+
+            .selling-title{
+                font-size: 2rem;
+                color : hsl(228, 4%, 26%);
+                margin-bottom: 1.4rem;
+            }
+
+            .selling-desc-wrapper{
+                display: grid;
+                row-gap: 1.6rem;
+                .selling-desc{
+                    display: grid;
+                    row-gap: 0.2rem;
+
+                    .selling-check{
+                        display: flex;
+                        align-items: center;
+                        column-gap: 0.5rem;
+
+                        span{
+                            width: 1.6rem;
+                        }
+                        h4{
+                            font-size: 1.2rem;
+                            color: hsl(228, 4%, 26%);
+                        }
+                    }
+
+                    .selling-desc-details{
+                        font-size: 1.18rem;
+                        color: hsl(225, 4%, 40%);
+                    }
+                }
+            }
+        }
+        // selling media
+        .selling-media{
+            flex-basis: 60%;
+            max-width: 60%;
+
+            img{
+                margin-left: auto;
+            }
+        }
+
+    // responsive version
+    @include devices (tablet){
+        flex-direction: column;
+        row-gap: 3.5rem;
+        .selling-content{
+            flex-basis: 100%;
+            max-width: 100%;
+        }
+        .selling-media{
+            flex-basis: 100%;
+            max-width: 100%;
+        }
+    }
+    }
+
+    @include devices (mobile) {
+        padding: 5rem 0.8rem;
+    }
+}

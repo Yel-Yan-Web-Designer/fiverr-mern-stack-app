@@ -41,7 +41,9 @@ const Navbar = () => {
             </div>
 
             <div className="links">
-                <span className='fiverr-business'>Fiverr Business</span>
+                <span className='fiverr-business'>
+                    <a href="https://business.fiverr.com/business?source=LOHP_business_banner" target='blank' className='fiverr-business'>Fiverr Business</a>
+                </span>
                 <span>Explore</span>
                 <span>English</span>
                 {!currentUser?.isSeller && <span>Become a Seller</span>}
@@ -116,7 +118,11 @@ const Navbar = () => {
                             <li>AI Services</li>
                         </ul>
                 </div>
-                <h4>Fiverr Business</h4>
+                <h4>
+                    <a href="https://business.fiverr.com/business?source=LOHP_business_banner" target='blank'>
+                        Fiverr Business
+                    </a>
+                </h4>
                 <h4>Explore</h4>
             </div>
             <div className="general-container">

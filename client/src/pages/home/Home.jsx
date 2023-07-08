@@ -2,7 +2,7 @@ import React from 'react';
 import "./Home.scss";
 
 // import components
-import {Featured, TrustedBy, Slide, CatCard} from "../../components/index";
+import {Featured, TrustedBy, Slide, CatCard, Selling , FiverrBusiness} from "../../components/index";
 //  Import data
 import { cards, projects } from '../../../data';
 
@@ -17,6 +17,8 @@ const Home = () => {
           return <CatCard key={x.id} items ={x}/>
         })}
       </Slide>
+      <Selling/>
+      <FiverrBusiness/>
     </div>
   )
 }

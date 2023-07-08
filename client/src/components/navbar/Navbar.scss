@@ -69,6 +69,10 @@ nav{
             span {
                 font-weight : 600;
                 cursor: pointer;
+
+                .fiverr-business{
+                    color: white;
+                }
             }
 
             @include devices (tablet){
@@ -320,6 +324,10 @@ nav{
 
                     h4{
                         cursor: pointer;
+
+                        a{
+                            color: hsl(0, 0%, 50%);
+                        }
                     }
                 }
             }
