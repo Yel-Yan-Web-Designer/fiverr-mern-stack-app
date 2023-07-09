@@ -5,4 +5,6 @@ export {default as Slide} from './slide/Slide';
 export {default as CatCard} from './catCard/CatCard';
 export {default as Selling} from './selling/Selling';
 export {default as FiverrBusiness} from './business/FiverrBusiness';
+export {default as CallToAction} from './calltoaction/CallToAction';
+export {default as LogoMaker} from './logomaker/Logomaker';
 export {default as Footer} from './footer/Footer';

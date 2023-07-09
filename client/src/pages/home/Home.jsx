@@ -2,7 +2,7 @@ import React from 'react';
 import "./Home.scss";
 
 // import components
-import {Featured, TrustedBy, Slide, CatCard, Selling , FiverrBusiness} from "../../components/index";
+import {Featured, TrustedBy, Slide, CatCard, Selling , FiverrBusiness , LogoMaker, CallToAction} from "../../components/index";
 //  Import data
 import { cards, projects } from '../../../data';
 
@@ -19,6 +19,7 @@ const Home = () => {
       </Slide>
       <Selling/>
       <FiverrBusiness/>
+      <LogoMaker/>
     </div>
   )
 }
