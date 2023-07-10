@@ -1,0 +1,78 @@
+@mixin devices ($breakpoint) { //the name of the mixin is devices
+  
+    @if $breakpoint == tablet {    
+    @media only screen and (max-width: 800px) {
+      @content;
+    }
+  }
+ 
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 500px) {
+      @content;
+    }
+  }
+}
+
+.categories {
+    padding: 2rem;
+
+    .container {
+        .categories-title{
+            font-size: 2rem;
+            color : hsl(228, 4%, 26%);
+            margin-bottom: 3rem;
+        }
+
+        .categories-container{
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 5rem 3rem;
+
+            .category{
+                text-align: center;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                row-gap: 0.5rem;
+
+                img {
+                    width: 3rem;
+                    aspect-ratio: 1;
+                    margin: 0 auto;
+                }
+                .line{
+                    margin: 0 auto;
+                    height: 2px;
+                    width: 20%;
+                    background: hsl(228, 4%, 76%);
+                    transition: all 0.2s ease-in-out;
+                }
+
+                &:hover{
+                    .line {
+                        width: 40%;
+                        background-color: hsl(152, 74%, 37%);
+                    }
+                }
+            }
+
+
+        }
+        // responsive version
+        @include devices (tablet){
+            .categories-container{
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @include devices (mobile){
+            .categories-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    }
+
+    @include devices (mobile){
+        padding: 2rem 0.8rem;
+    }
+}

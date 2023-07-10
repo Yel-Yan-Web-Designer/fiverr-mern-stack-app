@@ -2,9 +2,9 @@ import React from 'react';
 import "./Home.scss";
 
 // import components
-import {Featured, TrustedBy, Slide, CatCard, Selling , FiverrBusiness , LogoMaker, CallToAction} from "../../components/index";
+import {Featured, TrustedBy, Slide, CatCard, Selling , FiverrBusiness , LogoMaker, CallToAction, Categories} from "../../components/index";
 //  Import data
-import { cards, projects } from '../../../data';
+import { cards, projects, categoryItems } from '../../../data';
 
 const Home = () => {
   // console.log(cards);
@@ -18,6 +18,7 @@ const Home = () => {
         })}
       </Slide>
       <Selling/>
+      <Categories categoryItems = {categoryItems}/>
       <FiverrBusiness/>
       <LogoMaker/>
     </div>

@@ -185,3 +185,57 @@ export const gigs = [
     username: "Wilton Hunt",
   },
 ];
+
+// Categories section
+export const categoryItems = [
+  {
+      id : 1,
+      img : "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/graphics-design.d32a2f8.svg",
+      title : "Graphic Design"
+  },
+  {
+      id : 2,
+      img : "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/online-marketing.74e221b.svg",
+      title : "Digital Marketing"
+  },
+  {
+      id : 3,
+      img : "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/writing-translation.32ebe2e.svg",
+      title : "Writing & Translation"
+  },
+  {
+      id : 4,
+      img : "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/video-animation.f0d9d71.svg",
+      title : "Video & Animation"
+  },
+  {
+      id : 5,
+      img : "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/music-audio.320af20.svg",
+      title : "Music & Audio"
+  },
+  {
+      id : 6,
+      img : "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/programming.9362366.svg",
+      title : "Programming & Tech"
+  },
+  {
+      id : 7,
+      img : "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/business.bbdf319.svg",
+      title : "Business"
+  },
+  {
+      id : 8,
+      img : "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/lifestyle.745b575.svg",
+      title : "Lifestyle"
+  },
+  {
+      id : 9,
+      img : "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/data.718910f.svg",
+      title : "Date"
+  },
+  {
+      id : 10,
+      img : "https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/photography.01cf943.svg",
+      title : "Photography"
+  }
+]

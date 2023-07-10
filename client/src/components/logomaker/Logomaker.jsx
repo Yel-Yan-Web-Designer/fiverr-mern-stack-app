@@ -15,7 +15,7 @@ const Logomaker = () => {
             <p className="logomaker-desc">
             Pre-designed by top talent. Just add your touch.
                 </p>
-                <a href="https://business.fiverr.com/business?source=LOHP_business_banner" className="logomaker-btn" target='blank'>
+              <a href="https://www.fiverr.com/logo-maker?source=LOHP_banner" className="logomaker-btn" target='blank'>
                 Try Fiverr Logo Maker
             </a>
         </div>
