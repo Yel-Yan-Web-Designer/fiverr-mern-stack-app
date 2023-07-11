@@ -34,7 +34,7 @@ const Slide = ({children}) => {
         }
       },
       {
-        breakpoint : 500,
+        breakpoint : 580,
         settings : {
           dots: false,
           infinite: true,
