@@ -118,8 +118,9 @@ export const gigs = [
     pp: "https://images.pexels.com/photos/720598/pexels-photo-720598.jpeg?auto=compress&cs=tinysrgb&w=1600",
     desc: "I will create ai art character from your images and prompts",
     price: 59,
-    star: 5,
+    star: 5.2,
     username: "Anna Bell",
+    sup : 30
   },
   {
     id: 2,
@@ -127,8 +128,9 @@ export const gigs = [
     pp: "https://images.pexels.com/photos/1036627/pexels-photo-1036627.jpeg?auto=compress&cs=tinysrgb&w=1600",
     desc: "I will create ultra high quality character art with ai",
     price: 79,
-    star: 5,
+    star: 5.5,
     username: "Lannie Coleman",
+    sup : 7
   },
   {
     id: 3,
@@ -136,8 +138,9 @@ export const gigs = [
     pp: "https://images.pexels.com/photos/1062280/pexels-photo-1062280.jpeg?auto=compress&cs=tinysrgb&w=1600",
     desc: "I will creating unique ai generated artworks mid journey ai artist",
     price: 112,
-    star: 5,
+    star: 5.0,
     username: "Carol Steve",
+    sup : 10
   },
   {
     id: 4,
@@ -145,8 +148,9 @@ export const gigs = [
     pp: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=1600",
     desc: "I will create custom ai generated artwork using your photos",
     price: 99,
-    star: 4,
+    star: 4.1,
     username: "Don Weber",
+    sup : 27
   },
   {
     id: 5,
@@ -154,8 +158,9 @@ export const gigs = [
     pp: "https://images.pexels.com/photos/1771383/pexels-photo-1771383.jpeg?auto=compress&cs=tinysrgb&w=1600",
     desc: "I will recreate your dreams in high quality pictures",
     price: 59,
-    star: 5,
+    star: 5.4,
     username: "Audrey Richards",
+    sup : 9
   },
   {
     id: 6,
@@ -163,8 +168,9 @@ export const gigs = [
     pp: "https://images.pexels.com/photos/715546/pexels-photo-715546.jpeg?auto=compress&cs=tinysrgb&w=1600",
     desc: "I will create ai digital art illustration hyper realistic painting",
     price: 79,
-    star: 4,
+    star: 4.9,
     username: "Walton Shepard ",
+    sup : 12
   },
   {
     id: 7,
@@ -172,8 +178,9 @@ export const gigs = [
     pp: "https://images.pexels.com/photos/720606/pexels-photo-720606.jpeg?auto=compress&cs=tinysrgb&w=1600",
     desc: "I will generate images with your prompts using ai dalle",
     price: 89,
-    star: 5,
+    star: 5.0,
     username: "Waverly Schaefer",
+    sup : 17
   },
   {
     id: 8,
@@ -181,8 +188,9 @@ export const gigs = [
     pp: "https://images.pexels.com/photos/1699159/pexels-photo-1699159.jpeg?auto=compress&cs=tinysrgb&w=1600",
     desc: "I will create custom art using midjourney generator",
     price: 110,
-    star: 4,
+    star: 4.0,
     username: "Wilton Hunt",
+    sup : 23
   },
 ];
 

@@ -16,7 +16,6 @@
 nav{
     display: flex;
     width: 100%;
-    // position: sticky;
     position: fixed;
     top: 0;
     z-index: 2;
@@ -355,6 +354,7 @@ nav{
     background: white;
     color: black;
     box-shadow: 0px 2px 3px 0px hsl(0, 0%, 0%, 0.3);
+    position: sticky;
 
     .subnav-1{
         .nav-login{

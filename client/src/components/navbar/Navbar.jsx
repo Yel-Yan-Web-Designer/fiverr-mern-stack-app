@@ -3,13 +3,15 @@ import { useState, useEffect } from 'react';
 import "./Navbar.scss";
 import {RxHamburgerMenu} from "react-icons/rx";
 import {AiFillCaretDown} from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link , useLocation} from "react-router-dom";
 
 const Navbar = () => {
     const [dropdown, setDropdown] = useState(false);
     const [scroll, setScroll] = useState(false);
     const [navOpen , setNavOpen] = useState(false);
     const [option , setoption] = useState(false);
+
+    const {pathname} = useLocation();
 
     const currentUser = {
         id: 1,
@@ -34,7 +36,7 @@ const Navbar = () => {
     }, [])
 
   return (
-    <nav className={navOpen ? "nav-open" : ""} id={scroll ? "active" : ""}>
+    <nav className={navOpen ? "nav-open" : ""} id={scroll || pathname !== "/" ? "active" : ""}>
         <div className="subnav-1">
             <div className="logo">
                 <h2 className='fiverr-logo'>fiverr</h2>

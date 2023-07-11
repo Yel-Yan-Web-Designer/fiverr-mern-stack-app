@@ -1,0 +1,96 @@
+@mixin devices ($breakpoint) { //the name of the mixin is devices
+  
+    @if $breakpoint == bigtablet {    
+        @media only screen and (max-width: 1024px) {
+          @content;
+        }
+      }
+
+    @if $breakpoint == tablet {    
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  }
+ 
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 450px) {
+      @content;
+    }
+  }
+}
+
+.gigs{
+    .container{
+        padding:  3rem 2rem;
+
+        // responsive mobile
+        @include devices (mobile){
+            padding: 3rem 0.8rem;
+        }
+
+        // menu
+        .menu {
+            margin-block: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            // left
+            .left {
+                display: flex;
+                flex-wrap: wrap;
+                column-gap: 0.8rem;
+                align-items: center;
+
+                .budget{
+                    color: gray;
+                    font-weight: 500;
+                }
+
+                input {
+                    padding: 0.2rem 0.8rem;
+                    font-size: 1rem;
+                    border: 1px solid gray;
+
+                    &:focus{
+                        border: 1px solid gray;
+                        outline: 1px solid gray;
+                    }
+                }
+                .apply-btn{
+                    display: inline-block;
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 3px;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    background-color:hsl(152, 74%, 37%) ;
+
+                    &:hover{
+                        background-color: hsl(152, 74%, 27%);
+                    }
+                }
+            }
+            //right
+        }
+
+        // gig cards
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 3rem 2rem;
+            justify-items: space-between;
+
+            @include devices(bigtablet){
+                grid-template-columns: repeat(3, minmax( 0, 1fr));
+            }
+            @include devices (tablet){
+                grid-template-columns: repeat(2, minmax( 0, 1fr));
+            }
+            @include devices (mobile){
+                gap: 3.5rem 2rem;
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+        }
+    }
+}
