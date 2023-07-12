@@ -72,6 +72,45 @@
                 }
             }
             //right
+            .right{
+                display: flex;
+                column-gap: 0.7rem;
+                align-items: center;
+                position: relative;
+
+                .sortby {
+                    color: gray;
+                    font-weight: 500;
+                }
+                .sortby-type{
+                    color: black;
+                    font-weight: 600;
+                }
+                .down{
+                    cursor: pointer;
+                    width: 1.6rem;
+                }
+
+                .right-menu{
+                    position: absolute;
+                    top: 30px; right: 10px;
+                    background: white;
+                    color: black;
+                    display: flex;
+                    width: 8rem;
+                    flex-direction: column;
+                    row-gap: 0.4rem;
+                    border-radius: 5px;
+                    z-index: 2;
+                    border : 1px solid gray;
+                    
+                    span {
+                        display: inline-block;
+                        padding: 0.4rem 0.5rem;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
 
         // gig cards

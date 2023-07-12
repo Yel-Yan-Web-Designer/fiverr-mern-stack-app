@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 const GigCard = ({items}) => {
   let {img, desc , pp, username , price , star, sup} = items;
-  console.log(star)
   return (
     <Link to="/gig/123" className='gigcard-link'>
       <div className="gigcard">
