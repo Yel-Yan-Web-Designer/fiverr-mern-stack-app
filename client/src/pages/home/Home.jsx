@@ -12,17 +12,23 @@ const Home = () => {
     <div className="home">
       <Featured/>
       <TrustedBy/>
-      <Slide>
-        {cards.map(x => {
-          return <CatCard key={x.id} items ={x}/>
-        })}
-      </Slide>
+      <div className="slide-container">
+        <h1>Popular services</h1>
+        <Slide>
+          {cards.map(x => {
+            return <CatCard key={x.id} items ={x}/>
+          })}
+        </Slide>
+      </div>
       <Selling/>
       <Categories categoryItems = {categoryItems}/>
       <FiverrBusiness/>
-      <Slide>
-        {projects.map(card => <ProjectCard key={card.id} card = {card}/>)}
-      </Slide>
+      <div className="slide-container">
+        <h1>Inspiring work made on Fiverr</h1>
+        <Slide>
+          {projects.map(card => <ProjectCard key={card.id} card = {card}/>)}
+        </Slide>
+      </div>
       <LogoMaker/>
     </div>
   )

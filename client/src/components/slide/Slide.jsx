@@ -47,7 +47,6 @@ const Slide = ({children}) => {
   };
   return (
     <div className='slide' >
-      <h1>Popular services</h1>
       <div className="container">
           <Slider {...settings}>
             {children}

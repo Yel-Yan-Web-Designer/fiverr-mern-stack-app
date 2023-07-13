@@ -11,9 +11,7 @@ const Gigs = () => {
   const [open, setOpen] = useState(false);
   const minRef = useRef(null);
   const maxRef = useRef(null);
-
-  console.log(open);
-
+  
   // apply min & max budget
   function apply () {
     console.log(minRef.current.value)
