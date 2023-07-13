@@ -6,15 +6,13 @@ import { gigs } from '../../../data';
 import GigCard from '../../components/gigCard/GigCard';
 
 const Gigs = () => {
+  // /api/gigs?sort="sales"
   const [sort, setSort] = useState("sales");
   const [open, setOpen] = useState(false);
   const minRef = useRef(null);
   const maxRef = useRef(null);
 
-  // dropdown filters
-  function handleDropDown () {
-    return setOpen (prevState => !prevState);
-  }
+  console.log(open);
 
   // apply min & max budget
   function apply () {
@@ -24,8 +22,8 @@ const Gigs = () => {
 
   // resorting
   function reSort (type){
-    setSort(type); // seting type 
-    setOpen(prevState => !prevState)
+    setSort(type); // setting type 
+    setOpen(!open)
   }
 
   return (
@@ -50,18 +48,18 @@ const Gigs = () => {
               {sort === "sales" ? "BestSelling" : "Newest"}
             </span>
             <img 
-              onClick={handleDropDown}
+              onClick={() => setOpen (!open)}
               src="./img/down.png" alt="" 
               className='down'
             />
             {open && (
               <div className="right-menu">
                 {sort === "sales" ? 
-                <span onClick={reSort("createdAt")}>Newest</span>
+                <span onClick={()=> reSort("createdAt")}>Newest</span>
                   : (
-                <span onClick={reSort("sales")}>Selling</span>   
+                <span onClick={() => reSort("sales")}>Selling</span>   
                 )}
-              <span onClick={reSort("sales")}>Popular</span>   
+              <span onClick={() => reSort("sales")}>Popular</span>   
             </div>
             )}
           </div>
