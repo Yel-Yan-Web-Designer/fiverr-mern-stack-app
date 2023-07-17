@@ -36,7 +36,7 @@ const Messages = () => {
               <td><h4>John Doe</h4></td>
               <td>
               <Link className='messages-link' to="/message/123">
-                {message.substring(0, 100)}
+                {message.substring(0, 100)}...
                 </Link>
               </td>
               <td>2 days ago</td>
@@ -48,7 +48,7 @@ const Messages = () => {
               <td><h4>Steven</h4></td>
               <td>
               <Link className='messages-link' to="/message/123">
-                {message.substring(0, 100)}
+                {message.substring(0, 100)}...
                 </Link>
               </td>
               <td>1 day ago</td>
@@ -60,7 +60,7 @@ const Messages = () => {
               <td><h4>Jessica</h4></td>
               <td>
                 <Link className='messages-link' to="/message/123">
-                {message.substring(0, 100)}
+                {message.substring(0, 100)}...
                 </Link>
               </td>
               <td>1 weeks ago</td>
@@ -72,7 +72,7 @@ const Messages = () => {
               <td><h4>Abel</h4></td>
               <td>
                 <Link className='messages-link' to="/message/123">
-                {message.substring(0, 100)}
+                {message.substring(0, 100)}...
                 </Link>
               </td>
               <td>3 days ago</td>
@@ -84,7 +84,7 @@ const Messages = () => {
               <td><h4>Joshua</h4></td>
               <td>
                 <Link className='messages-link' to="/message/123">
-                {message.substring(0, 100)}
+                {message.substring(0, 100)}...
                 </Link>
               </td>
               <td>2 days ago</td>
