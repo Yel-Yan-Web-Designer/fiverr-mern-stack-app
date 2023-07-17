@@ -16,7 +16,7 @@ const Navbar = () => {
     const currentUser = {
         id: 1,
         username : "Anna",
-        isSeller : false
+        isSeller : true
     }
 
     function toggleNavMenu () {
