@@ -1,0 +1,125 @@
+@mixin devices ($breakpoint) { //the name of the mixin is devices
+  
+    @if $breakpoint == bigtablet {    
+        @media only screen and (max-width: 1024px) {
+          @content;
+        }
+      }
+
+    @if $breakpoint == tablet {    
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  }
+ 
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 450px) {
+      @content;
+    }
+  }
+}
+.add {
+    padding: 3rem 2rem;
+
+    .container {
+        // title
+        .add-title{
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        // add section
+        .add-section{
+            display: grid;
+            grid-template-columns: repeat(2 , minmax(0, 1fr));
+            gap: 2rem;
+
+            // left info
+            .info{
+                display : flex;
+                flex-direction : column;
+                row-gap: 1.3rem;
+
+                .left-title,.left-category,
+                .left-cover,.left-upload-file,
+                .left-desc{
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 0.6rem;
+
+                    label{
+                        font-size: 1.3rem;
+                        color: hsl(0, 0%, 40%);
+                    }
+                    input {
+                        padding: 0.6rem 1rem;
+                        font-size: 1.05rem;
+                    }
+                    select{
+                        padding: 0.6rem 1rem;
+                        font-size: 1.05rem;
+                    }
+                    textarea{
+                        resize: none;
+                        height: 150px;
+                        font-size: 1.05rem;
+                        padding: 0.8rem;
+                    }
+                }
+            }
+
+            // right details
+            .details {
+                display : flex;
+                flex-direction : column;
+                row-gap: 1.3rem;
+
+                .right-title,.right-desc,.right-revision,
+                .right-deli,.right-features,.right-price{
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 0.6rem;
+
+                    label{
+                        font-size: 1.3rem;
+                        color: hsl(0, 0%, 40%);
+                    }
+
+                    input {
+                        padding: 0.6rem 1rem;
+                        font-size: 1.05rem;
+                    }
+                    textarea{
+                        resize: none;
+                        height: 150px;
+                        font-size: 1.05rem;
+                        padding: 0.8rem;
+                    }
+                }
+                // create button
+                .create-btn{
+                    background: hsl(152, 74%, 37%);
+                    color: white;
+                    padding:0.45rem 0.8rem;
+                    font-size: 0.8rem;
+                    border: none;
+                    border-radius: 3px;
+                    cursor: pointer;
+                    font-size: 1.1rem;
+
+                    &:hover{
+                        background: hsl(152, 74%, 27%);
+                    }
+                }
+            }
+
+            @include devices (tablet){
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+
+    @include devices (mobile){
+        padding: 3rem 0.5rem;
+    }
+}
