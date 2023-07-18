@@ -43,6 +43,7 @@ nav{
                 position: relative;
                 font-weight: 800;
                 letter-spacing: -1px;
+                color: white;
     
                 &:after {
                     content: "";
@@ -146,6 +147,10 @@ nav{
             span {
                 font-weight: 600;
                 cursor: pointer;
+
+                .link{
+                    color: white;
+                }
 
                 .join-btn{
                     background: none;
@@ -357,7 +362,14 @@ nav{
     position: sticky;
 
     .subnav-1{
+
+        .fiverr-logo{
+            color: black;
+        }
         .nav-login{
+            .link{
+                color: black;
+            }
             .join-btn {
                 background: hsl(152, 74%, 37%);
                 &:hover{

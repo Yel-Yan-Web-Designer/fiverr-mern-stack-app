@@ -16,7 +16,7 @@ const Navbar = () => {
     const currentUser = {
         id: 1,
         username : "Anna",
-        isSeller : true
+        isSeller : false
     }
 
     function toggleNavMenu () {
@@ -39,7 +39,7 @@ const Navbar = () => {
     <nav className={navOpen ? "nav-open" : ""} id={scroll || pathname !== "/" ? "active" : ""}>
         <div className="subnav-1">
             <div className="logo">
-                <h2 className='fiverr-logo'>fiverr</h2>
+                <Link to="/"><h2 className='fiverr-logo'>fiverr</h2></Link>
             </div>
 
             <div className="links">
@@ -51,7 +51,7 @@ const Navbar = () => {
                 {!currentUser?.isSeller && <span>Become a Seller</span>}
             </div>
 
-            {currentUser ? (
+            {!currentUser ? (
                 <div className="user">
                     <div className="user-container" onClick={() => setoption(!option)}>
                         <div className="avatar">
@@ -78,8 +78,8 @@ const Navbar = () => {
             ) : 
             (
             <div className="nav-login">
-                <span>Sign In</span>
-                <span><button className='join-btn'>Join</button></span>
+                <span><Link to="/login" className='link'>Sign In</Link></span>
+                <span><Link to="/register"><button className='join-btn'>Join</button></Link></span>
                 <RxHamburgerMenu className='hamburger-menu' onClick={toggleNavMenu}/>
             </div>
             )
