@@ -64,6 +64,10 @@
                     padding: 0.6rem 1rem;
                     font-size: 1.1rem;
                 }
+
+                .err-mail,.err-password{
+                    color: hsl(0, 100%, 50%);
+                }
             }
 
             // button submit

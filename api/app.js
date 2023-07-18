@@ -2,9 +2,12 @@ const express = require("express");
 const app = express();
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
+const cors = require('cors');
 const connectDB = require('./database/connect');
 const port = process.env.PORT || 8000;
 
+// 👇️ configure CORS
+app.use(cors());
 // middleware
 app.use(express.json()); 
 app.use(cookieParser()); // for cookies
