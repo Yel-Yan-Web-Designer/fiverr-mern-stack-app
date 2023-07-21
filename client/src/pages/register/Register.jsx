@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import "./Register.scss";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import upload from "../../utils/upload";
+import { newRequest } from '../../utils/newRequest';
 
 const Register = () => {
   const [file , setFile] = useState(null);
@@ -9,30 +10,49 @@ const Register = () => {
     username : "",
     email : "",
     password : "",
-    img : "",
+    img : null,
     country : "",
     isSeller : false,
     desc : ""
   })
-  console.log(user)
-  async function handleSubmit (e) {
-    e.preventDefault();
-  }
 
+
+  const navigate = useNavigate();
+
+
+  // onChange for all inputs
   function handleChange (e) {
-    const name = e.target.name;
-    const value = e.target.value;
+    const {name , value} = e.target;
     setUser((prevState) => {
       return {...prevState , [name] : value}
     })
   }
 
+  //handle isSeller onChange
   function handleSeller (e) {
     setUser(prevState => ({...prevState, isSeller : e.target.checked}));
   }
 
+  // handle img file type
   function handleImg (e){
     setFile(e.target.files[0])
+  }
+
+  // hanlde submit form
+ async function handleSubmit (e) {
+    e.preventDefault(); 
+    // upload image file to cloudinary
+    const url = await upload(file);
+  
+      try {
+        await newRequest.post("/auth/register", {
+          ...user,
+          img : url
+        });
+        navigate("/")
+      } catch (err) {
+        console.log(err);
+      }
   }
   return (
     <div className='register'>

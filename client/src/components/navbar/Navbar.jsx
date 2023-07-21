@@ -16,7 +16,7 @@ const Navbar = () => {
     const currentUser = {
         id: 1,
         username : "Anna",
-        isSeller : false
+        isSeller : true
     }
 
     function toggleNavMenu () {
@@ -51,7 +51,7 @@ const Navbar = () => {
                 {!currentUser?.isSeller && <span>Become a Seller</span>}
             </div>
 
-            {!currentUser ? (
+            {currentUser ? (
                 <div className="user">
                     <div className="user-container" onClick={() => setoption(!option)}>
                         <div className="avatar">
@@ -100,7 +100,7 @@ const Navbar = () => {
         </div>
         {/* mobile nav */}
         <div className='mobile-nav'>
-            {!currentUser ? (<button className='join-fiverr'>Join Fiverr</button>) : (
+            {currentUser ? (<button className='join-fiverr'><Link to="/register" style={{color : "white"}}>Join fiverr</Link></button>) : (
                 <Link className='logout-fiverr' to="/">Log out</Link>
             )}
 

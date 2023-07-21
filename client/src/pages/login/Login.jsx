@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import "./Login.scss";
-import axios from "axios";
+import { newRequest } from '../../utils/newRequest';
 import {useNavigate} from "react-router-dom";
 
 const Login = () => {
-  const [getEmail , setEmail] = useState('');
-  const [getPassword , setPassword] = useState('');
+  const [email , setEmail] = useState('');
+  const [password , setPassword] = useState('');
   const [error , setError] = useState(null);
 
   const navigate = useNavigate();
@@ -14,8 +14,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`http://localhost:8000/api/v1/auth/login`, {getEmail , getPassword})
-      console.log(res)
+      const {data} = await newRequest.post("/auth/login", {email , password})
+      localStorage.setItem("currentUser" , JSON.stringify(data.userInfo))
       navigate('/'); // move to home page
     } catch (err) {
       setError(err.response.data)
