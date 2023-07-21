@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import "./Navbar.scss";
 import {RxHamburgerMenu} from "react-icons/rx";
 import {AiFillCaretDown} from "react-icons/ai";
-import { Link , useLocation} from "react-router-dom";
+import { Link , useLocation, useNavigate} from "react-router-dom";
+import { newRequest } from '../../utils/newRequest';
 
 const Navbar = () => {
     const [dropdown, setDropdown] = useState(false);
@@ -12,12 +13,9 @@ const Navbar = () => {
     const [option , setoption] = useState(false);
 
     const {pathname} = useLocation();
+    const navigate = useNavigate();
 
-    const currentUser = {
-        id: 1,
-        username : "Anna",
-        isSeller : true
-    }
+    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
 
     function toggleNavMenu () {
         setNavOpen(prevState => !prevState);
@@ -34,6 +32,17 @@ const Navbar = () => {
             window.removeEventListener("scroll", scrollForNav)
         }
     }, [])
+
+    //handle logout
+    async function handleLogout () {
+        try {
+            await newRequest.post("/auth/logout");
+            localStorage.setItem("currentUser", null);
+            navigate("/")
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
   return (
     <nav className={navOpen ? "nav-open" : ""} id={scroll || pathname !== "/" ? "active" : ""}>
@@ -53,13 +62,14 @@ const Navbar = () => {
 
             {currentUser ? (
                 <div className="user">
+                    <span>{currentUser?.username}</span>
                     <div className="user-container" onClick={() => setoption(!option)}>
                         <div className="avatar">
-                        <img
-                        src="https://images.pexels.com/photos/1115697/pexels-photo-1115697.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                        alt=""
-                        className='avatar'
-                    />
+                            <img
+                            src={currentUser?.img || "img/noavatar.jpg"}
+                            alt=""
+                            className='avatar'
+                        />
                         </div>
                         {option && <div className='options'>
                             {currentUser?.isSeller && (
@@ -70,7 +80,7 @@ const Navbar = () => {
                             )}
                     <Link className='option-links' to="/orders">Orders</Link>
                     <Link className='option-links' to="/messages">Messages</Link>
-                    <Link className='option-links' to="/">Logout</Link>
+                    <span className='option-links'  onClick={handleLogout}>Logout</span>
                         </div>}
                     </div>
                     <RxHamburgerMenu className='hamburger-menu' onClick={toggleNavMenu}/>
@@ -100,8 +110,8 @@ const Navbar = () => {
         </div>
         {/* mobile nav */}
         <div className='mobile-nav'>
-            {currentUser ? (<button className='join-fiverr'><Link to="/register" style={{color : "white"}}>Join fiverr</Link></button>) : (
-                <Link className='logout-fiverr' to="/">Log out</Link>
+            {!currentUser ? (<button className='join-fiverr'><Link to="/register" style={{color : "white"}}>Join fiverr</Link></button>) : (
+                <span className='logout-fiverr' onClick={handleLogout}>Log out</span>
             )}
 
             <div className="category-container">

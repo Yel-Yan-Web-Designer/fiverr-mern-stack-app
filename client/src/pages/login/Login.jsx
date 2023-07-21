@@ -16,7 +16,7 @@ const Login = () => {
     try {
       const {data} = await newRequest.post("/auth/login", {email , password})
       localStorage.setItem("currentUser" , JSON.stringify(data.userInfo))
-      navigate('/'); // move to home page
+      navigate('/'); // redirect to home page
     } catch (err) {
       setError(err.response.data)
     }
