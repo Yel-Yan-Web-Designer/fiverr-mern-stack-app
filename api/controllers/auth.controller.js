@@ -11,7 +11,13 @@ const register = async (req, res) => {
             ...req.body,
             password : hash.toString()
         });
-        return res.status(201).json({newUser});
+        const token = jwt.sign(
+            {id : newUser._id , isSeller : newUser.isSeller},
+            process.env.JWT_KEY
+        )
+        const {password , ...newUserInfo} = newUser._doc;
+        res.cookie("accessToken", token , {httpOnly : true});
+        return res.status(201).json({newUserInfo});
     } catch (error) {
         const errors = handleErrors(error);
         return res.status(400).json({ errors });

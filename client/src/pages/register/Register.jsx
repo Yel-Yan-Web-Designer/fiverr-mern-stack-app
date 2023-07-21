@@ -45,10 +45,11 @@ const Register = () => {
     const url = await upload(file);
   
       try {
-        await newRequest.post("/auth/register", {
+       const {data} =  await newRequest.post("/auth/register", {
           ...user,
           img : url
         });
+        localStorage.setItem("currentUser", JSON.stringify(data.newUserInfo));
         navigate("/")
       } catch (err) {
         console.log(err);
