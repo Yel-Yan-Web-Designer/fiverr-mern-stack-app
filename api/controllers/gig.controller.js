@@ -50,17 +50,25 @@ const getSingleGig = async (req, res, next) => {
 }
 const getGigs = async (req, res, next) => {
     const query = req.query;
+    
     const filters = {
-        ...(query.category && {
-            category : {$regex : query.category, $options : "i"}
+        ...(query.userId && {userId : query.userId}),
+        ...(query.category && {category : query.category}),
+        ...((query.min || query.max) && {
+            price : {
+                ...(query.min && {$gt : query.min}),
+                ...(query.max && {$lt : query.max}),
+            }
         }),
-        ...(query.search && {
-            title : {$regex : query.search , $options : "i"}
-        })
-    }   
+        ...(query.search && {title : {
+            $regex : query.search,
+            $options : "i"
+        }})
+    }
+
     try {
         // find all existed gigs
-        const gigs = await Gig.find(filters);
+        const gigs = await Gig.find(filters).sort({[query.sort] : 1});
         return res.status(200).json(gigs);
     } catch (err) {
         next(err)
