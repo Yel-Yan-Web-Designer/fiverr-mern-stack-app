@@ -12,7 +12,6 @@ export default async function upload (file) {
         
         const {url} = data;
         return url;
-
     } catch (error) {
         console.log(error)
     }

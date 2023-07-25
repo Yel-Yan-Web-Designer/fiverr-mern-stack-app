@@ -1,7 +1,16 @@
 const express = require('express');
-const getGigs = require('../controllers/gig.controller')
+const jwtVerify = require("../middleware/jwtVerify");
+const {
+    createGig,
+    deleteGig,
+    getSingleGig,
+    getGigs
+} = require('../controllers/gig.controller')
 const router = express.Router();
 
-router.get("/", getGigs)
+router.post("/", jwtVerify ,createGig);
+router.delete("/:id", jwtVerify , deleteGig);
+router.get("/singleId/:id", getSingleGig);
+router.get("/", jwtVerify , getGigs);
 
 module.exports = router;
