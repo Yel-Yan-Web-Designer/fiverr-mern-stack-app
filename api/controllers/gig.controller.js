@@ -19,7 +19,7 @@ const createGig = async (req, res, next) => {
 }
 const deleteGig = async (req, res, next) => {
     try {
-        // find requested gig is exist or not
+        // find user's requested gig is exist or not
         const gig = await Gig.findById(req.params.id);
         
         // check it's the owner of thier gig or not
@@ -38,7 +38,7 @@ const getSingleGig = async (req, res, next) => {
     try {
         // find gig is already existed or not
         const singleGig = await Gig.findById(req.params.id);
-        
+
         // if not exist show not found gig
         if(!singleGig) return next(createErrors(404, "Gig not found!"))
 
@@ -48,9 +48,23 @@ const getSingleGig = async (req, res, next) => {
         next(err);
     }
 }
-const getGigs = (req, res) => {
-    console.log(req.body.userId);
-    return res.send("get gigs");
+const getGigs = async (req, res, next) => {
+    const query = req.query;
+    const filters = {
+        ...(query.category && {
+            category : {$regex : query.category, $options : "i"}
+        }),
+        ...(query.search && {
+            title : {$regex : query.search , $options : "i"}
+        })
+    }   
+    try {
+        // find all existed gigs
+        const gigs = await Gig.find(filters);
+        return res.status(200).json(gigs);
+    } catch (err) {
+        next(err)
+    }
 }
 
 module.exports = {
