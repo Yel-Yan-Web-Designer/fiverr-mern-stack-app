@@ -19,6 +19,7 @@ const createGig = async (req, res, next) => {
 }
 const deleteGig = async (req, res, next) => {
     try {
+        // find requested gig is exist or not
         const gig = await Gig.findById(req.params.id);
         
         // check it's the owner of thier gig or not
@@ -26,14 +27,26 @@ const deleteGig = async (req, res, next) => {
             return next(createErrors(403 , "You can delete only your gig!"))
         }
 
+        // if it's owner of the gig, user can delete it
         const deleteGig = await Gig.findByIdAndDelete(req.params.id)
-        return res.json(deleteGig);
+        return res.status(200).json("Gig has been deleted!");
     } catch (err) {
         return next(err);
     }
 }
-const getSingleGig = (req, res) => {
-    return res.send("get single gig");
+const getSingleGig = async (req, res, next) => {
+    try {
+        // find gig is already existed or not
+        const singleGig = await Gig.findById(req.params.id);
+        
+        // if not exist show not found gig
+        if(!singleGig) return next(createErrors(404, "Gig not found!"))
+
+        // else show the existed gig
+        return res.status(200).json(singleGig);
+    } catch (err) {
+        next(err);
+    }
 }
 const getGigs = (req, res) => {
     console.log(req.body.userId);

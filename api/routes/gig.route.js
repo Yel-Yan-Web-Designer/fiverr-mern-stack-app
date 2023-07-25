@@ -11,6 +11,6 @@ const router = express.Router();
 router.post("/", jwtVerify ,createGig);
 router.delete("/:id", jwtVerify , deleteGig);
 router.get("/singleId/:id", getSingleGig);
-router.get("/", jwtVerify , getGigs);
+router.get("/" , getGigs);
 
 module.exports = router;
