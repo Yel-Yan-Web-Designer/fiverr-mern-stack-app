@@ -2,79 +2,86 @@ const Gig = require("../models/gig.model");
 const {createErrors} = require("../errors/handleErrors");
 
 const createGig = async (req, res, next) => {
-
-    if(!req.isSeller){
-        return next(createErrors(403, "Only sellers can create a gig!"))
-    }
-    const newGig = new Gig({
-        ...req.body,
-        userId : req.userId
-    })
     try {
-        const saveGig = await newGig.save();
-        return res.status(201).json(saveGig)
-    } catch (err) {
-        return next(err)
-    }
-}
-const deleteGig = async (req, res, next) => {
-    try {
-        // find user's requested gig is exist or not
-        const gig = await Gig.findById(req.params.id);
-        
-        // check it's the owner of thier gig or not
-        if(gig.userId !== req.userId){
-            return next(createErrors(403 , "You can delete only your gig!"))
-        }
+        // check user is seller or not
+        if(!req.isSeller) return next(createErrors(403 , "Only sellers can create gigs!"));
 
-        // if it's owner of the gig, user can delete it
-        const deleteGig = await Gig.findByIdAndDelete(req.params.id)
-        return res.status(200).json("Gig has been deleted!");
+
+        // if user is seller create new gig
+        const newGig = await Gig.create({
+            ...req.body,
+            // this req.userId comes from cookies while user login
+            userId : req.userId 
+        });
+        return res.status(201).json(newGig);
     } catch (err) {
         return next(err);
     }
 }
+const deleteGig = async (req, res, next) => {
+   try {
+    // check it is owner of the gig or not
+    // if not owner show err
+    if(req.params.id !== req.userId) return next(createErrors(403, "You can delete only you gig!"));
+
+
+    //if it's owner can delete it
+    await Gig.findByIdAndDelete(req.params.id);
+    return res.status(200).send("Gig has been deleted!");
+   } catch (err) {
+    next(err);
+   }
+}
 const getSingleGig = async (req, res, next) => {
     try {
-        // find gig is already existed or not
-        const singleGig = await Gig.findById(req.params.id);
+        // get single gig by gig'id which is stored in db
+        const gig = await Gig.findById(req.params.id);
 
-        // if not exist show not found gig
-        if(!singleGig) return next(createErrors(404, "Gig not found!"))
-
-        // else show the existed gig
-        return res.status(200).json(singleGig);
+        // if gig is not exised show error
+        if(!gig) return next(createErrors(403, "Gig not found!"));
+        return res.status(200).json(gig);
     } catch (err) {
         next(err);
     }
 }
 const getGigs = async (req, res, next) => {
-    const query = req.query;
-    
+    const q = req.query; // destructure query
+
+//create filers object to store condition based on query parameter
     const filters = {
-        ...(query.userId && {userId : query.userId}),
-        ...(query.category && {category : query.category}),
-        ...((query.min || query.max) && {
+        // if userId exists in query, spread operator will add userId as filters object key and q.userId as value
+        ...(q.userId && {userId : q.userId}),
+
+        // if category exists in query, spread operator will add category as filters object key and q.category as value
+        ...(q.category && {category : {
+            $regex : q.category,
+            $options : "i"
+        }}),
+
+        // if either min or max exists in query, spread operator will add price as filters object key
+        ...((q.min || q.max) && {
             price : {
-                ...(query.min && {$gt : query.min}),
-                ...(query.max && {$lt : query.max}),
+                //if both min or max exist, sperad operator will  $gt or $lt as key and q.min or q.max as value
+                ...(q.min && {$gt : q.min}),
+                ...(q.max && {$lt : q.max})
             }
         }),
-        ...(query.search && {title : {
-            $regex : query.search,
+
+        /* if search exist in query, spread operator will add title as filters key and to perform 
+            a case-insensitive regular expression search on the 'title' field */
+        ...(q.search && {title : {
+            $regex : q.search,
             $options : "i"
         }})
     }
-
     try {
-        // find all existed gigs
-        const gigs = await Gig.find(filters).sort({[query.sort] : 1});
-        return res.status(200).json(gigs);
+        // after finding matching gigs using filters, sort method is chained to query how resulted should be sorted
+        const gigs = await Gig.find(filters).sort({[q.sort] : 1});
+        return res.status(200).json(gigs)
     } catch (err) {
-        next(err)
+        next(err);
     }
 }
-
 module.exports = {
     createGig,
     deleteGig,
