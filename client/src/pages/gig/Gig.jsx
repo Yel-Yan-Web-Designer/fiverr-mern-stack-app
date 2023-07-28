@@ -13,7 +13,7 @@ const Gig = () => {
   const {id } = useParams();
 
   //fetching data for single id gig
-  const {isLoading , error , data}= useQuery({
+  const {isLoading , error ,  data : gigData}= useQuery({
     queryKey : ["gig"],
     queryFn : async () => {
       const {data} = await newRequest.get(`/gigs/single/${id}`);
@@ -21,7 +21,7 @@ const Gig = () => {
     }
   })
 
-  const userId = data?.userId; // get single gig's userId
+  const userId = gigData?.userId; // get single gig's userId
   
   //fetching data for user's info
   const {
@@ -31,12 +31,16 @@ const Gig = () => {
   } = useQuery({
     queryKey : ["single gig user"],
     queryFn : async () => {
-      const {data} = await newRequest.get(`/users/${userId}`);
+      const {data} = await newRequest.get(`/users/${gigData.userId}`);
       return data;
-    }
+    },
+  /* 
+  the query will be enabled (executed) only if userId has a truthy value.
+  this ensures that the user query is not executed until the userId value is available and not undefined. 
+  */
+    enabled : !!userId
   })
 
-  console.log(dataUser.username)
 
   //react slick settings manually
   const settings = {
@@ -51,15 +55,15 @@ const Gig = () => {
       <div className="container">
         {/* load single gig data */}
         {isLoading ? "Loading Gig..." :
-          error ? `Something went wrong ${error.message}` :
+          error ? `Something went wrong ${error}` :
           (
           <div className="wrapper">
           <div className="left">
-            <span><b>fiverr</b> / {data.category}</span>
-            <h1 className='left-title'>{data.desc}</h1>
+            <span><b>fiverr</b> / {gigData.category}</span>
+            <h1 className='left-title'>{gigData?.title}</h1>
             {/* load user data */}
             {isLoadingUser ? "Loading user info.." : 
-              errorUser ? `Something went wrong ${error.message}` :
+              errorUser ? `Something went wrong ${error}` :
               (
                 <div className="user">
                 <img src={ dataUser.img || "img/noavatar.jpg"} alt="user's profile picture" className="user-profile-pic" />
@@ -67,12 +71,13 @@ const Gig = () => {
                 <h3 className="username">{dataUser.username}</h3>
   
                 <div className="stars">
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <span>5.0</span>
+                  {/* make explicit an array for stars */}
+                  {!isNaN(Math.round(gigData?.totalStars / gigData?.starNumbers)) &&
+                    Array(Math.round(gigData?.totalStars / gigData?.starNumbers))
+                    .fill()
+                    .map((x, i) => <img key={i} src="/img/star.png" alt="" />)
+                  }
+                  <span>{Math.round(gigData?.totalStars / gigData?.starNumbers)}</span>
                 </div>
               </div>
   
@@ -99,13 +104,13 @@ const Gig = () => {
             <div className="package">
               {/* package price */}
               <div className="package-price">
-                <h3>Single page web design</h3>
-                <h3>$ 59.99</h3>
+                <h3>{gigData?.shortTitle}</h3>
+                <h3>$ {gigData?.price}</h3>
               </div>
               {/* package description */}
               <div className="package-desc">
                 <p>
-                1 static page design + development OR convert from Figma with React, Next, TS, SSR, clean code
+                  {gigData?.shortDesc}
                 </p>
               </div>
               {/* package details */}
@@ -113,38 +118,22 @@ const Gig = () => {
                 <div className="package-service">
                   <div className="package-item">
                     <img src="/img/clock.png" alt="" />
-                    <h4>7 Days Delivery</h4>
+                    <h4>{gigData?.deliveryTime} Days Delivery</h4>
                   </div>
                   <div className="package-item">
                     <img src="/img/recycle.png" alt="" />
-                    <h4>Unlimited Revision</h4>
+                    <h4>{gigData?.revisionTime} Revision</h4>
                   </div>
                 </div>
                 <div className="package-features">
-                  <div className="package-feature-item">
-                    <img src="/img/greencheck.png" alt="" />
-                    <span>Functional website</span>
-                  </div>
-                  <div className="package-feature-item">
-                    <img src="/img/greencheck.png" alt="" />
-                    <span>Hosting setup</span>
-                  </div>
-                  <div className="package-feature-item">
-                    <img src="/img/greencheck.png" alt="" />
-                    <span>Content Upload</span>
-                  </div>
-                  <div className="package-feature-item">
-                    <img src="/img/greencheck.png" alt="" />
-                    <span>1 plugin/extension</span>
-                  </div>
-                  <div className="package-feature-item">
-                    <img src="/img/greencheck.png" alt="" />
-                    <span>Social media icons</span>
-                  </div>
-                  <div className="package-feature-item">
-                    <img src="/img/greencheck.png" alt="" />
-                    <span>Speed optimization</span>
-                  </div>
+                  {gigData?.features.map((feature , i) => {
+                    return (
+                      <div className="package-feature-item" key={i}>
+                        <img src="/img/greencheck.png" alt="" />
+                        <span>{feature}</span>
+                    </div>
+                    )
+                  })}
                 </div>
               </div>
               {/* package btn */}
@@ -156,43 +145,36 @@ const Gig = () => {
             <div className="left">
               {/* about gig */}
               <h2>About This Gig</h2>
-              <p>
-                I use an AI program to create images based on text prompts. This
-                means I can help you to create a vision you have through a textual
-                description of your scene without requiring any reference images.
-                Some things I have found it often excels at are: Character portraits
-                (E.g. a picture to go with your DnD character) Landscapes (E.g.
-                wallpapers, illustrations to compliment a story) Logos (E.g. Esports
-                team, business, profile picture) You can be as vague or as
-                descriptive as you want. Being more vague will allow the AI to be
-                more creative which can sometimes result in some amazing images. You
-                can also be incredibly precise if you have a clear image of what you
-                want in mind. All of the images I create are original and will be
-                found nowhere else. If you have any questions you are more than
-                welcome to send me a message.
-              </p>
+              <p>{gigData?.desc}</p>
                 {/*  seller */}
               <div className="seller-container">
                 <h2>About the seller</h2>
-                <div className="seller">
-                <img src="https://images.pexels.com/photos/720327/pexels-photo-720327.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="user's profile picture" className="user-profile-pic" />
-
-                <div className="seller-info">
-                  <h3 className="username">Anna</h3>
-                  <p>Web Designer</p>
-                  <div className="stars">
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <span>5.0</span>
-                </div>
-                <button className="contact-btn">
-                  Contact me
-                </button>
-                </div>
-              </div>
+                {/* load data user for seller */}
+                {isLoading ? "Loading seller info.." :
+                  error ? `Something went wrong ${error.message}` :
+                  (
+                    <div className="seller">
+                      <img src={ dataUser?.img|| "img/noavatar.jpg"} alt="user's profile picture" className="user-profile-pic" />
+    
+                    <div className="seller-info">
+                      <h3 className="username">{gigData?.username}</h3>
+                      <p>Web Designer</p>
+                      <div className="stars">
+                        {/* make explicit an array for stars */}
+                        {!isNaN(Math.round(gigData?.totalStars / gigData?.starNumbers)) &&
+                          Array(Math.round(gigData?.totalStars / gigData?.starNumbers))
+                          .fill()
+                          .map((x, i) => <img key={i} src="/img/star.png" alt="" />)
+                        }
+                      <span>{Math.round(gigData?.totalStars / gigData?.starNumbers)}</span>
+                    </div>
+                      <button className="contact-btn">
+                        Contact me
+                      </button>
+                    </div>
+                  </div>
+                  )
+                }
               </div>
               
               {/*  card */}
@@ -200,7 +182,7 @@ const Gig = () => {
                 <div className="card-top">
                   <div className="card-data">
                     <h4 className='card-top-title'>From</h4>
-                    <h4>India</h4>
+                    <h4>{dataUser?.country}</h4>
                   </div>
                   <div className="card-data">
                     <h4 className='card-top-title'>Avg. response time</h4>
@@ -220,8 +202,7 @@ const Gig = () => {
                   </div>
                 </div>
                 <div className="card-bottom">
-                  <p>Hi, My name is Anna. I am a professional web designer with 4+ years of experience. I specialize in the logo designing field. My service offers to design all types of logos that meet your desire and demand. I strongly believe in the quality of the work. Share your requirements, I’ll make the perfect logo that suits your business.
-                  Besides professional work, I have a lot of hobbies such as going to the gym, yoga, and watching movies. Because it gives me an opportunity to enhance my life. For me, hobbies create a positive impact both on your personal and professional life.
+                  <p>{gigData?.desc}
                   </p>
                   <p style={{marginTop : "1em"}}>
                     Thanks!

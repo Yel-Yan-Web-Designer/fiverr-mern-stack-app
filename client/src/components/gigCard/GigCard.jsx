@@ -6,7 +6,7 @@ import { newRequest } from '../../utils/newRequest';
 
 
 const GigCard = ({items}) => {
-  let { desc , price , cover, totalStars, starNumbers , userId , _id} = items;
+  let { title , price , cover, totalStars, starNumbers , userId , _id} = items;
 
   const {isLoading , error, data} = useQuery({
     queryKey : [userId],
@@ -30,7 +30,7 @@ const GigCard = ({items}) => {
           </div>
           )
           }
-          <p className='gigcard-desc'>{desc}</p>
+          <p className='gigcard-desc'>{title}</p>
           <div className="star">
             <img src="/img/star.png" alt="" />
             <span>{!isNaN(Math.round(totalStars / starNumbers)) && Math.round(totalStars / starNumbers) }</span>
