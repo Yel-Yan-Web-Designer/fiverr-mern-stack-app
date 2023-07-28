@@ -13,7 +13,7 @@ const deleteUser = async (req, res, next) => {
 
 const getUser = async (req, res) => {
    const user = await User.findById(req.params.id);
-   return res.status(200).json({ user })
+   return res.status(200).json(user);
 }
 
 const getAllUsers = async (req, res) => {

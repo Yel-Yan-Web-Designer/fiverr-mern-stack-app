@@ -1,9 +1,18 @@
 import React,{useState, useRef} from 'react';
 import "./Gigs.scss";
-import { gigs } from '../../../data';
+// import { gigs } from '../../../data'; mock api data
+import {   useQuery } from '@tanstack/react-query';
+import { newRequest } from '../../utils/newRequest';
 
 // import component
 import GigCard from '../../components/gigCard/GigCard';
+
+// fetched gigs
+
+async function fetchGigs () {
+   const {data} = await newRequest.get("/gigs");
+   return data;
+}
 
 const Gigs = () => {
   // /api/gigs?sort="sales"
@@ -11,11 +20,17 @@ const Gigs = () => {
   const [open, setOpen] = useState(false);
   const minRef = useRef(null);
   const maxRef = useRef(null);
+
+  // fetch data with react query
+ const {isLoading , error , data , refetch} = useQuery({
+    queryKey : ["gigs"],
+    queryFn : fetchGigs
+  })
   
   // apply min & max budget
   function apply () {
-    console.log(minRef.current.value)
-    console.log(maxRef.current.value)
+  //when user click apply btn trigger react-query background refetch to check it's their any data updated or not
+    refetch(); 
   }
 
   // resorting
@@ -63,7 +78,11 @@ const Gigs = () => {
           </div>
         </div>
         <div className="cards">
-          {gigs.map(gig => <GigCard key={gig.id} items={gig} />)}
+          { isLoading ? "Loading..." : 
+            error ? `error has been occured ${error.message}`:
+            data.length === 0 ? 
+            "There are no gigs yet!": 
+            data.map(gig => <GigCard key={gig._id} items={gig} />)}
         </div>
       </div>
     </div>
