@@ -2,7 +2,7 @@ import React from 'react';
 import "./Home.scss";
 
 // import components
-import {Featured, TrustedBy, Slide, CatCard, Selling , FiverrBusiness , LogoMaker, CallToAction,ProjectCard, Categories} from "../../components/index";
+import {Featured, TrustedBy, Slide, CatCard, Selling , FiverrBusiness , LogoMaker,ProjectCard, Categories} from "../../components/index";
 //  Import data
 import { cards, projects, categoryItems } from '../../../data';
 

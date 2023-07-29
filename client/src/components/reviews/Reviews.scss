@@ -1,0 +1,36 @@
+@mixin devices ($breakpoint) { //the name of the mixin is devices
+  
+    @if $breakpoint == bigtablet {    
+        @media only screen and (max-width: 1024px) {
+          @content;
+        }
+      }
+
+    @if $breakpoint == tablet {    
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  }
+ 
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 450px) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 1024px) {
+      @content;
+    }
+  }
+}
+
+// reviews
+.reviews{
+margin-top: 2rem;
+display: grid;
+row-gap: 2rem;
+
+h2 {
+    margin-block: 2rem;
+}
+}

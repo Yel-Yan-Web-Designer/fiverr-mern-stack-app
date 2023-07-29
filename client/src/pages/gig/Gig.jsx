@@ -7,6 +7,7 @@ import "./Gig.scss";
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { newRequest } from '../../utils/newRequest';
+import {Reviews } from '../../components/index.js';
 
 const Gig = () => {
   // get single gig's id from url
@@ -210,129 +211,7 @@ const Gig = () => {
                 </div>
               </div>
               {/* review */}
-              <div className="reviews">
-                <h2>Reviews</h2>
-                <div className="user-feedback">
-                  <div className="user-profile-pic">
-                  <img src="https://images.pexels.com/photos/4124367/pexels-photo-4124367.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="user's profile picture"/>
-                  </div>
-                  <div className="user-info">
-                    {/* info details */}
-                    <div className="user-info-details">
-                      <h4 className='username'>Sidney Owen</h4>
-                      <div className="wrapper">
-                        <img
-                        src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1e9-1f1ea.png"
-                        alt="national flag"
-                        className='flag'
-                        />
-                        <span>Germany</span>
-                      </div>
-                    </div>
-                    {/*  stars reviews */}
-                    <div className="stars">
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <span>5.0</span>
-                    </div>
-                    {/* reviews text */}
-                    <p className='reviews-text'>
-                    PRO: Clear communication, timely drafts, willing to support. CON: However no feeling for the industry the logo was intended for. Lack of graphical experience to design a custom logo, rather utilizing off-the-shelve stock logos. For simle text-based logos, definitely a job worth considering.
-                    </p>
-                    {/* helpful */}
-                    <div className="helpful">
-                        <h5>helpful</h5>
-                        <img src="/img/like.png" alt="" />
-                        <h5>Yes</h5>
-                        <img src="/img/dislike.png" alt="" />
-                        <h5>No</h5>
-                    </div>
-                  </div>
-                </div>
-                <div className="user-feedback">
-                  <div className="user-profile-pic">
-                  <img src="https://images.pexels.com/photos/842980/pexels-photo-842980.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="user's profile picture"/>
-                  </div>
-                  <div className="user-info">
-                    {/* info details */}
-                    <div className="user-info-details">
-                      <h4 className='username'>Kyle simpson</h4>
-                      <div className="wrapper">
-                        <img
-                        src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1fa-1f1f8.png"
-                        alt="national flag"
-                        className='flag'
-                        />
-                        <span>United State</span>
-                      </div>
-                    </div>
-                    {/*  stars reviews */}
-                    <div className="stars">
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <span>5.0</span>
-                    </div>
-                    {/* reviews text */}
-                    <p className='reviews-text'>
-                    This artist did a perfect job with pretty minimal instructions/description from me. Definitely recommend! This is my first time using Fiverr for anything, and the process was seamless. Thank you!
-                    </p>
-                    {/* helpful */}
-                    <div className="helpful">
-                        <h5>helpful</h5>
-                        <img src="/img/like.png" alt="" />
-                        <h5>Yes</h5>
-                        <img src="/img/dislike.png" alt="" />
-                        <h5>No</h5>
-                    </div>
-                  </div>
-                </div>
-                <div className="user-feedback">
-                  <div className="user-profile-pic">
-                  <img src="https://images.pexels.com/photos/839586/pexels-photo-839586.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="user's profile picture"/>
-                  </div>
-                  <div className="user-info">
-                    {/* info details */}
-                    <div className="user-info-details">
-                      <h4 className='username'>Garner David</h4>
-                      <div className="wrapper">
-                        <img
-                        src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1fa-1f1f8.png"
-                        alt="national flag"
-                        className='flag'
-                        />
-                        <span>united State</span>
-                      </div>
-                    </div>
-                    {/*  stars reviews */}
-                    <div className="stars">
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <img src="/img/star.png" alt="" />
-                      <span>5.0</span>
-                    </div>
-                    {/* reviews text */}
-                    <p className='reviews-text'>
-                    I have been working with Art for a few weeks now and he has been nothing but professional and helpful! The logo I received at the end was brilliant and what I needed; although I only paid for the standard package, I definitely believe I received a premium service! Great man for the Job!
-                    </p>
-                    {/* helpful */}
-                    <div className="helpful">
-                        <h5>helpful</h5>
-                        <img src="/img/like.png" alt="" />
-                        <h5>Yes</h5>
-                        <img src="/img/dislike.png" alt="" />
-                        <h5>No</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <Reviews gigId = {id}/>
             </div>
           </div>
           </div>

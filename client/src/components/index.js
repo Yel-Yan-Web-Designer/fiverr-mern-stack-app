@@ -7,6 +7,7 @@ export {default as ProjectCard} from './projectCard/ProjectCard'
 export {default as Selling} from './selling/Selling';
 export {default as FiverrBusiness} from './business/FiverrBusiness';
 export {default as Categories} from './Categories/Categories';
-export {default as CallToAction} from './calltoaction/CallToAction';
 export {default as LogoMaker} from './logomaker/Logomaker';
+export {default as Reviews } from './reviews/Reviews';
+export {default as Review} from './review/Review';
 export {default as Footer} from './footer/Footer';
