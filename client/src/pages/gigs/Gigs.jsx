@@ -7,8 +7,8 @@ import { newRequest } from '../../utils/newRequest';
 // import component
 import GigCard from '../../components/gigCard/GigCard';
 
-// fetched gigs
 
+// fetched gigs
 async function fetchGigs () {
    const {data} = await newRequest.get("/gigs");
    return data;

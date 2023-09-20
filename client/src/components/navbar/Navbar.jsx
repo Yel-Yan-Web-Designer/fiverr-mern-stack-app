@@ -12,7 +12,7 @@ const Navbar = () => {
     const [navOpen , setNavOpen] = useState(false);
     const [option , setoption] = useState(false);
 
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
     const navigate = useNavigate();
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
@@ -152,10 +152,3 @@ const Navbar = () => {
 
 export default Navbar;
 
-/*
-Gigs
-Add new gigs
-orders
-messages
-logout
-*/

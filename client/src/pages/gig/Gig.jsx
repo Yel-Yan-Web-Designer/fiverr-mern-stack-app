@@ -11,7 +11,7 @@ import {Reviews } from '../../components/index.js';
 
 const Gig = () => {
   // get single gig's id from url
-  const {id } = useParams();
+  const { id } = useParams();
 
   //fetching data for single id gig
   const {isLoading , error ,  data : gigData}= useQuery({

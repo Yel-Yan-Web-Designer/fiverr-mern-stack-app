@@ -1,38 +1,64 @@
 import React from 'react';
-import "./Review.scss"
+import "./Review.scss";
+import { useQuery } from "@tanstack/react-query";
+import { newRequest } from '../../utils/newRequest';
 
-const Review = () => {
+const Review = ({ review }) => {
+    // get loggined user 
+    const {isLoading , err , data} = useQuery({
+      queryKey : [review.userId],
+      queryFn : async () => {
+        const { data } = await newRequest(`/users/${review.userId}`);
+        return data
+      }
+    })
+
+    console.log(data)
+
   return (
     <div className="review">
-      <div className="user-profile-pic">
-      <img src="https://images.pexels.com/photos/4124367/pexels-photo-4124367.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="user's profile picture"/>
-      </div>
+      {isLoading 
+      ? "Loading..."
+      : err
+      ? `Something went wrong ${err.messages}`
+      : (
+        <div className="user-profile-pic">
+          <img src={data.img || "/img/noavatar.jpg"} alt="user's profile picture"/>
+        </div>
+      )
+      }
       <div className="user-info">
         {/* info details */}
-        <div className="user-info-details">
-          <h4 className='username'>Sidney Owen</h4>
-          <div className="wrapper">
-            <img
-            src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1e9-1f1ea.png"
-            alt="national flag"
-            className='flag'
-            />
-            <span>Germany</span>
+        {
+          isLoading 
+          ? "Loading..."
+          : err
+          ? `Something went wrong ${err.messages}`
+          : (
+          <div className="user-info-details">
+            <h4 className='username'>{data.username}</h4>
+            <div className="wrapper">
+              <img
+              src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1e9-1f1ea.png"
+              alt="national flag"
+              className='flag'
+              />
+              <span>{data.country}</span>
+            </div>
           </div>
-        </div>
+          )
+        }
         {/*  stars reviews */}
         <div className="stars">
-          <img src="/img/star.png" alt="" />
-          <img src="/img/star.png" alt="" />
-          <img src="/img/star.png" alt="" />
-          <img src="/img/star.png" alt="" />
-          <img src="/img/star.png" alt="" />
-          <span>5.0</span>
+        {Array(review.star)
+          .fill()
+          .map((item, i) => (
+            <img src="/img/star.png" alt="" key={i} />
+          ))}
+          <span>{review.star}</span>
         </div>
         {/* reviews text */}
-        <p className='reviews-text'>
-        PRO: Clear communication, timely drafts, willing to support. CON: However no feeling for the industry the logo was intended for. Lack of graphical experience to design a custom logo, rather utilizing off-the-shelve stock logos. For simle text-based logos, definitely a job worth considering.
-        </p>
+        <p className='reviews-text'>{review.desc}</p>
         {/* helpful */}
         <div className="helpful">
             <h5>helpful</h5>
